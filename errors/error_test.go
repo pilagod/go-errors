@@ -38,9 +38,13 @@ func (s *testErrorSuite) TestErrorData() {
 func (s *testErrorSuite) TestErrorMessage() {
 	err := CustomError("Hello World")
 
-	message := err.Error()
+	s.Equal(
+		err.Error(),
+		fmt.Sprintf("[%s] Hello World", customErrorCode),
+	)
+	e := Cause(err).(*Error)
 
-	s.Equal(message, fmt.Sprintf("[%s] Hello World", customErrorCode))
+	s.Equal("Hello World", e.Message())
 }
 
 func (s *testErrorSuite) TestErrorHTTPStatusCode() {

@@ -1,3 +1,3 @@
 .PHONY: test
 test:
-	go test -v ./errors
+	go test -v -cover ./errors
